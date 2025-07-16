@@ -11,12 +11,18 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^1.10.0",
+    "axios-cookiejar-support": "^0.5.1",
     "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
     "cookie-session": "^2.1.0",
     "dotenv": "^17.2.0",
-    "express": "^4.17.1",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
     "express-validator": "^6.6.1",
     "http-errors": "^2.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "session": "^0.1.0",
+    "tough-cookie": "^5.1.2",
     "uuid": "^7.0.3"
   },
   "devDependencies": {
