@@ -9,7 +9,7 @@ async function register(username, password, role){
             role:role
         });
 
-        console.log(res.data);
+        console.log(res.data.message);
     }catch(err){
         console.error(`register err[client.js] ${err.response.data.message}`)
     };
@@ -151,21 +151,20 @@ async function taskbystatus(completed){
 };
 
 async function main(){
-    // await register('ishanbhowal@gmail.com', 'talknot123', 'user');
+    // await login('sush@gmail.com', 'sush123');
     // await login('anubhav@gmail.com', 'hmm123');
     // await login('lachit@gmail.com', 'talkwith00');
     // await login('linus@gmail.com', 'linus330');
     // await login('david@gmail.com', 'david007');
-    // await register('sayanbhowal@gmail.com', 'whatever123', 'admin');
+    // await register('mz@gmail.com', 'haaawhat123', 'user');
     await login('sayanbhowal@gmail.com', 'whatever123');
     // await login('ishanbhowal@gmail.com', 'talknot123');
-    // await getUsernames()
-    // await addtask('ask michaelengelo to make a statue out of me');
+    // await addtask('greet everyone yayyyy');
     // await getalltasks();
     // await getowntasks();
     // await gettasksbyuser("lachit@gmail.com");
-    // await deletetask('0ff706da-554b-4020-bbe9-a289500c90b5');
-    // await edittask('2a6f8294-e5b0-46c1-a136-979ae883b534', 'sayan changed david task', true);
+    // await deletetask('788cae16-1dc4-440c-a8c7-7019c7efccca');
+    // await edittask('2a6f8294-e5b0-46c1-a136-979ae883b534', 'david is again an asshole -sayan', true);
     // await taskbystatus('false');
 };
 
