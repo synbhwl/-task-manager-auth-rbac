@@ -153,7 +153,55 @@ app.get('/api/tasks/users/:username', authmw, checkRole('admin'), (req, res)=>{
 
     res.status(200).json({message:'user tasks are fetched', tasks: usertasks});
 
-})
+});
+
+// deleting a task
+app.delete('/api/tasks/:taskid', authmw, (req, res)=>{
+    const taskid = req.params.taskid;
+    const rawtasks = fs.readFileSync('./data/tasks.json', 'utf8');
+    const tasks = JSON.parse(rawtasks);
+    const task = tasks.find(t=> t.taskid === taskid);
+
+    if(req.user.role === "admin"){
+        const updated = tasks.filter(t=> t.taskid !== taskid);
+        fs.writeFileSync('./data/tasks.json', JSON.stringify(updated, null, 2), 'utf8');
+        res.status(200).json({message:"task deleted", task: task});
+    } else if(req.user.role === 'user' && task.userid === req.user.id){
+        const updated = tasks.filter(t=> t.taskid !== taskid);
+        fs.writeFileSync('./data/tasks.json', JSON.stringify(updated, null, 2), 'utf8');
+        res.status(200).json({message:"task deleted", task: task});
+    };
+});
+
+// editing a task
+app.patch('/api/tasks/:taskid', authmw, (req, res)=>{
+    const {title, completed} = req.body;
+    const taskid = req.params.taskid;
+    const rawtasks = fs.readFileSync('./data/tasks.json', 'utf8');
+    const tasks = JSON.parse(rawtasks);
+    const task = tasks.find(t=> t.taskid === taskid);
+
+    if(req.user.role === "admin"){
+        task.title = title;
+        task.completed = completed;
+        fs.writeFileSync('./data/tasks.json', JSON.stringify(tasks, null, 2), 'utf8');
+        res.status(200).json({message:"task edited", task: task});
+    } else if(req.user.role === 'user' && task.userid === req.user.id){
+        task.title = title;
+        task.completed = completed;
+        fs.writeFileSync('./data/tasks.json', JSON.stringify(tasks, null, 2), 'utf8');
+        res.status(200).json({message:"task edited", task: task});
+    };
+});
+
+app.get('/api/tasks/:completed', authmw, checkRole('admin'), (req, res)=>{
+    const completed = req.params.completed === 'true';
+    const rawtasks = fs.readFileSync('./data/tasks.json', 'utf8');
+    const tasks = JSON.parse(rawtasks);
+
+    const updated = tasks.filter(t=> t.completed === completed);
+    res.status(200).json({message:"tasks with status found", tasks: updated});
+});
 
 app.listen(process.env.port || 3000, ()=>{
     console.log(`server is working at port ${process.env.port || 3000}`);

@@ -102,6 +102,54 @@ async function gettasksbyuser(username){
     }
 };
 
+async function deletetask(taskid){
+    try{
+        const res = await axios.delete(`${url}/api/tasks/${taskid}`, {
+            headers:{
+                Authorization:`Bearer ${token}`
+            }
+        });
+
+        console.log(res.data)
+    }catch(err){
+        console.error(`task delete err[client.js] ${err.response.data.message}`)
+    }
+};
+
+//edit task
+async function edittask(taskid, title, completed){
+    try{
+        const res = await axios.patch(`${url}/api/tasks/${taskid}`, {
+            title:title,
+            completed:completed
+        }, 
+        {
+            headers:{
+                Authorization:`Bearer ${token}`
+            }
+        });
+
+        console.log(res.data)
+    }catch(err){
+        console.error(`task edit err[client.js] ${err.response.data.message}`)
+    }
+};
+
+// get tasks by status
+async function taskbystatus(completed){
+    try{
+        const res = await axios.get(`${url}/api/tasks/${completed}`, {
+            headers:{
+                Authorization:`Bearer ${token}`
+            }
+        });
+
+        console.log(res.data)
+    }catch(err){
+        console.error(`tasks by status fetch err[client.js] ${err.response.data.message}`)
+    }
+};
+
 async function main(){
     // await register('ishanbhowal@gmail.com', 'talknot123', 'user');
     // await login('anubhav@gmail.com', 'hmm123');
@@ -112,10 +160,13 @@ async function main(){
     await login('sayanbhowal@gmail.com', 'whatever123');
     // await login('ishanbhowal@gmail.com', 'talknot123');
     // await getUsernames()
-    // await addtask('ask michaelengelo to make a statue out of it');
+    // await addtask('ask michaelengelo to make a statue out of me');
     // await getalltasks();
     // await getowntasks();
-    await gettasksbyuser("lachit@gmail.com");
+    // await gettasksbyuser("lachit@gmail.com");
+    // await deletetask('0ff706da-554b-4020-bbe9-a289500c90b5');
+    // await edittask('2a6f8294-e5b0-46c1-a136-979ae883b534', 'sayan changed david task', true);
+    // await taskbystatus('false');
 };
 
 main()
