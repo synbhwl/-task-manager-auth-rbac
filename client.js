@@ -1,12 +1,13 @@
 const axios = require('axios');
 const url = 'http://localhost:3000';
 
-async function register(username, password, role){
+async function register(username, password, role, admincode){
     try{
         const res = await axios.post(`${url}/api/auth/register`,{
             username:username,
             password:password,
-            role:role
+            role:role,
+            admincode:admincode
         });
 
         console.log(res.data.message);
@@ -153,18 +154,20 @@ async function taskbystatus(completed){
 async function main(){
     // await login('sush@gmail.com', 'sush123');
     // await login('anubhav@gmail.com', 'hmm123');
-    // await login('lachit@gmail.com', 'talkwith00');
+    // await register('lachit@gmail.com', 'talkwith00');
     // await login('linus@gmail.com', 'linus330');
     // await login('david@gmail.com', 'david007');
-    // await register('mz@gmail.com', 'haaawhat123', 'user');
+    // await register('check@gmail.com', 'yesik132');
     await login('sayanbhowal@gmail.com', 'whatever123');
     // await login('ishanbhowal@gmail.com', 'talknot123');
-    // await addtask('greet everyone yayyyy');
+    // await addtask('error handling is finally done');
     // await getalltasks();
     // await getowntasks();
     // await gettasksbyuser("lachit@gmail.com");
     // await deletetask('788cae16-1dc4-440c-a8c7-7019c7efccca');
-    // await edittask('2a6f8294-e5b0-46c1-a136-979ae883b534', 'david is again an asshole -sayan', true);
+    // await edittask('2a6f8294-e5b0-46c1-a136-979ae883b534', 'david is finally an asshole -sayan', true);
+    // await edittask('35ee16ea-8de5-4baf-a01f-7279f18f41f8', 'error handling is finally done', true);
+    await edittask('35ee16ea-8de5-4baf-a01f-7279f18f41f8', 'hell yea, error handling is finally done', true);
     // await taskbystatus('false');
 };
 
