@@ -9,9 +9,10 @@ const { readusers, writeUsers } = require('../utils/filehelpers');
 const { signjwt } = require('../utils/jwthelper');
 const { generateid } = require('../utils/idhelper');
 const { hashpass, checkpass } = require('../utils/hashhelper');
+const { authvalidator } = require('../validators/authvalidator');
 
 //register
-router.post('/register', async (req, res, next)=>{
+router.post('/register', authvalidator, async (req, res, next)=>{
     try {    
         const { username, password, role, admincode } = req.body;
         if(!username) throw createError(400, 'cannot register: missing username');
@@ -45,7 +46,7 @@ router.post('/register', async (req, res, next)=>{
 });
 
 //login
-router.post('/login', async (req, res, next)=>{
+router.post('/login', authvalidator, async (req, res, next)=>{
     try {        
         const { username, password } = req.body;
         if(!username) throw createError(400, 'cannot login: missing username');
